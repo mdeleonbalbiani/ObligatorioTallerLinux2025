@@ -1,1 +1,18 @@
+---
+- name: Configurar servidor NFS en CentOS
+  hosts: Centos
+  become: yes
+
+  - tasks:
+
+    - name: Instalar servidor NFS
+      ansible.builtin.dnf:
+        name: nfs-utils
+        state: present
+        
+    - name: Asegurar que el servicio NFS esté iniciado y habilitado
+      ansible.builtin.systemd:
+        name: nfs-server
+        enabled: yes
+        state: started
 
